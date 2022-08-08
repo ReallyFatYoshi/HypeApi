@@ -1,0 +1,36 @@
+{
+  "name": "hypeapi",
+  "version": "0.1.0-beta",
+  "description": "Hyperlands Api Wrapper.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "tsc && npm link hypeapi && node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReallyFatYoshi/HypeApi.git"
+  },
+  "keywords": [
+    "hyperlands",
+    "wrapper",
+    "minecraft",
+    "mcbe",
+    "nodejs",
+    "bun"
+  ],
+  "author": "ReallyFatYoshi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ReallyFatYoshi/HypeApi/issues"
+  },
+  "homepage": "https://github.com/ReallyFatYoshi/HypeApi#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "hypeapi": "file:../index.js",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.6.4"
+  }
+}
