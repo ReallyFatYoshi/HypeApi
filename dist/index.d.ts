@@ -4,6 +4,7 @@ export default class HypeApi {
     #private;
     lastRateLimit: number;
     constructor(options?: {
+        headers?: any;
         endpoints?: {
             hypelb?: string;
             hypeuser?: string;

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example Page</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+      }
+
+      div#wrapper {
+        display: flex;
+        flex-direction: row;
+        height: 60vh;
+        width: 80vh;
+        background-color: whitesmoke;
+        border: solid 1px white;
+        box-shadow: 1px 1px 1px 1px gray;;
+        border-radius: 5px;
+      }
+
+      .sides {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 100%;
+        background-color: whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      window.onload = function () {
+        const form = document.getElementById("form");
+        const input = document.getElementById("name");
+        const stats = document.getElementById("stats");
+
+        form.onsubmit = function (evd) {
+          evd.preventDefault();
+          alert("Fetching...");
+
+          fetch("/api/stats/" + input.value)
+            .then((res) => res.json())
+            .then((res) => {
+                stats.innerHTML = `
+                    <h3>
+                       Name: ${res.stats.general.playerName}<br />
+                       Level: ${res.stats.general.level}<br />
+                       Progress: ${res.stats.general.progress}/${res.stats.general.maxProgress}<br />
+                       <br /> 
+                       <br />
+                       <img height="100" width="100" src="https://api.hyperlandsmc.net/head/${input.value}" alt="${input.value}"> 
+                    </h3>
+                `
+            }).catch(()=>{
+                stats.innerHTML = `
+                    <h3>
+                       Player by the name of ${input.value} couldn't be found. 
+                    </h3>
+                `
+            });
+        };
+      };
+    </script>
+    <div id="wrapper">
+      <div class="sides">
+        <form id="form">
+          <input type="text" id="name" minlength="3" maxlength="16" required />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      <div class="sides" id="stats"></div>
+    </div>
+  </body>
+</html>
