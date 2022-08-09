@@ -1,11 +1,17 @@
 {
-  "name": "hypeapi",
+  "name": "@reallyfatyoshi/hypeapi",
   "version": "0.1.0-beta",
-  "description": "Hyperlands Api Wrapper.",
+  "description": "Lightweight Hyperlands Api CLient.",
+  "engines": {
+    "node": "^16.14.2",
+    "vscode": "^1.22.0"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "tsc && npm link hypeapi && node test.js"
+    "build": "rm dist -r && tsc -b",
+    "test": "node test.js",
+    "pretest": "tsc && npm link @reallyfatyoshi/hypeapi"
   },
   "repository": {
     "type": "git",
@@ -13,14 +19,15 @@
   },
   "keywords": [
     "hyperlands",
-    "wrapper",
-    "minecraft",
+    "bedrock",
     "mcbe",
-    "nodejs",
-    "bun"
+    "api"
   ],
   "author": "ReallyFatYoshi",
   "license": "MIT",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "bugs": {
     "url": "https://github.com/ReallyFatYoshi/HypeApi/issues"
   },
@@ -31,6 +38,7 @@
     "typescript": "^4.7.4"
   },
   "devDependencies": {
+    "@sindresorhus/tsconfig": "^3.0.1",
     "@types/node": "^18.6.4"
   }
 }
