@@ -56,9 +56,9 @@
             .then((res) => {
                 stats.innerHTML = `
                     <h3>
-                       Name: ${res.stats.general.playerName}<br />
-                       Level: ${res.stats.general.level}<br />
-                       Progress: ${res.stats.general.progress}/${res.stats.general.maxProgress}<br />
+                       Name: ${res.general.playerName}<br />
+                       Level: ${res.general.level}<br />
+                       Progress: ${res.general.progress}/${res.general.maxProgress}<br />
                        <br /> 
                        <br />
                        <img height="100" width="100" src="https://api.hyperlandsmc.net/head/${input.value}" alt="${input.value}"> 

@@ -1,4 +1,5 @@
-const HypeApi = require("hypeapi").default;
+const HypeApi = require("../dist/index").default;
+
 const client = new HypeApi();
 
 (async function () {

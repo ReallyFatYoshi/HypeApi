@@ -1,17 +1,22 @@
 {
   "name": "@reallyfatyoshi/hypeapi",
   "version": "0.1.0",
-  "description": "Lightweight Hyperlands Api CLient.",
+  "description": "Lightweight Hyperlands Api Client.",
   "engines": {
     "node": "^16.14.2",
     "vscode": "^1.22.0"
   },
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm dist -r && tsc -b",
-    "test": "node test.js",
-    "pretest": "tsc && npm link @reallyfatyoshi/hypeapi"
+    "test:playerLastJoin": "node tests/getPlayerLastJoin.js",
+    "test:playerCount": "node tests/getPlayerCounts.js",
+    "test:website": "node tests/website.js",
+    "pretest": "tsc && npm i"
   },
   "repository": {
     "type": "git",
@@ -26,7 +31,7 @@
   "author": "ReallyFatYoshi",
   "license": "MIT",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   },
   "bugs": {
     "url": "https://github.com/ReallyFatYoshi/HypeApi/issues"
@@ -34,7 +39,6 @@
   "homepage": "https://github.com/ReallyFatYoshi/HypeApi#readme",
   "dependencies": {
     "axios": "^0.27.2",
-    "hypeapi": "file:../index.js",
     "typescript": "^4.7.4"
   },
   "devDependencies": {

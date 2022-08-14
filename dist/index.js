@@ -13,36 +13,35 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _HypeApi_headers, _HypeApi_endpoints;
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
+const player_1 = require("./player");
 let leaderboardData;
 class HypeApi {
     constructor(options) {
         _HypeApi_headers.set(this, {
-            "user-agent": "HypeApi-Client/0.1.0-alpha",
+            "user-agent": "HypeApi-Client/0.1.0",
         });
         _HypeApi_endpoints.set(this, {
-            hypelb: "https://api.hyperlandsmc.net/leaderboards",
-            hypeuser: "https://api.hyperlandsmc.net/stats",
-            hypexuid: "https://api.hyperlandsmc.net/xuid",
-            hypecounts: "https://api.hyperlandsmc.net/playerCounts",
+            baseUrl: "https://api.hyperlandsmc.net",
+            hypelb: "/leaderboards",
+            hypeuser: "/stats",
+            hypexuid: "/xuid",
+            hypecounts: "/playerCounts",
         });
-        this.lastRateLimit = 120;
         if (options === null || options === void 0 ? void 0 : options.headers)
             __classPrivateFieldSet(this, _HypeApi_headers, options === null || options === void 0 ? void 0 : options.headers, "f");
-        if (options === null || options === void 0 ? void 0 : options.endpoints)
-            for (const option of Object.entries(options.endpoints))
-                __classPrivateFieldGet(this, _HypeApi_endpoints, "f")[option[0]] = option[1];
+        if (options === null || options === void 0 ? void 0 : options.baseUrl)
+            __classPrivateFieldGet(this, _HypeApi_endpoints, "f").baseUrl = options.baseUrl;
     }
     createRequest(options) {
         return (0, axios_1.default)({
-            method: (options === null || options === void 0 ? void 0 : options.method) || 'GET',
-            url: options.url,
+            method: (options === null || options === void 0 ? void 0 : options.method) || "GET",
+            url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").baseUrl + options.url,
             headers: (options === null || options === void 0 ? void 0 : options.headers) || __classPrivateFieldGet(this, _HypeApi_headers, "f"),
         })
             .then((res) => {
             this.lastRateLimit = parseInt(res.headers["x-rate-limit-remaining"]);
             return res.data;
-        })
-            .catch((_) => null);
+        }).catch(() => null);
     }
     async fetchLeaderboardData() {
         if (leaderboardData) {
@@ -50,7 +49,7 @@ class HypeApi {
                 return;
         }
         let data = await (0, axios_1.default)({
-            url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").hypelb,
+            url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").baseUrl + __classPrivateFieldGet(this, _HypeApi_endpoints, "f").hypelb,
             headers: __classPrivateFieldGet(this, _HypeApi_headers, "f"),
         })
             .then((res) => {
@@ -85,15 +84,22 @@ class HypeApi {
         return (_b = (_a = leaderboardData[lb].players) === null || _a === void 0 ? void 0 : _a.filter((v) => v.name == playerName)) === null || _b === void 0 ? void 0 : _b.at(0);
     }
     async getPlayer(playerName) {
-        return this.createRequest({
+        const res = await this.createRequest({
             url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").hypeuser + "/" + playerName,
         });
+        if (!res)
+            return res;
+        return new player_1.default(res);
     }
     async getPlayerFromXuid(xuid) {
         return this.createRequest({
             url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").hypexuid + "/" + xuid,
         });
     }
+    /**
+     * @method getPlayerCounts
+     * @returns {Promise<playerCounts | null>} Object with player counts for all gamemodes.
+     */
     async getPlayerCounts() {
         return this.createRequest({
             url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").hypecounts,

@@ -1,16 +1,12 @@
 import { playerCounts, playerStats, LeaderboardPlayers } from "./interfaces";
 import { leaderboardIds } from "./types";
+import Player from "./player";
 export default class HypeApi {
     #private;
     lastRateLimit: number;
     constructor(options?: {
-        headers?: any;
-        endpoints?: {
-            hypelb?: string;
-            hypeuser?: string;
-            hypexuid?: string;
-            hypecounts?: string;
-        };
+        headers?: object;
+        baseUrl?: string;
     });
     private createRequest;
     private fetchLeaderboardData;
@@ -20,7 +16,11 @@ export default class HypeApi {
         position: number;
         value: number;
     } | undefined>;
-    getPlayer(playerName: string): Promise<playerStats | null>;
+    getPlayer(playerName: string): Promise<Player | null>;
     getPlayerFromXuid(xuid: string): Promise<playerStats | null>;
+    /**
+     * @method getPlayerCounts
+     * @returns {Promise<playerCounts | null>} Object with player counts for all gamemodes.
+     */
     getPlayerCounts(): Promise<playerCounts | null>;
 }

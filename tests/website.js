@@ -1,7 +1,7 @@
 const fs = require("fs");
 const http = require("http");
-const path = require("path");
-const { default: HypeApi } = require("hypeapi");
+const HypeApi = require("../dist/index").default;
+
 const server = http.createServer();
 
 const client = new HypeApi();
@@ -19,7 +19,12 @@ server.on("request", async function (req, res) {
         .writeHead(200, {
           "Content-Type": "application/json",
         })
-        .end(JSON.stringify(player));
+        .end(JSON.stringify({
+          general: {
+            ...player.getLevel(),
+            playerName:path[2]
+          }
+        }));
     }
     return res
       .writeHead(401, {
@@ -31,10 +36,14 @@ server.on("request", async function (req, res) {
         })
       );
   } else {
-    const page = await fs.readFileSync("./tests/index.html",{encoding:'utf8'});
-    res.writeHead(200, {
-      "Content-Type": "text/html; charset=utf-8",
-    }).end(page);
+    const page = await fs.readFileSync("./tests/index.html", {
+      encoding: "utf8",
+    });
+    res
+      .writeHead(200, {
+        "Content-Type": "text/html; charset=utf-8",
+      })
+      .end(page);
   }
 });
 
