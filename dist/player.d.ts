@@ -1,7 +1,9 @@
-import { playerStats } from "./interfaces";
+import { apiPlayerResponse } from "./types/player";
 export default class Player {
     #private;
-    constructor(data: playerStats);
+    online: boolean;
+    xuid: string;
+    constructor(data: apiPlayerResponse);
     getLastLogout(format?: "YYYY/DD/MM" | "MM/DD/YYYY" | "DD/MM/YYYY"): {
         fullDate: string;
         time: string;

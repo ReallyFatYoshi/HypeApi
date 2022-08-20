@@ -1,7 +1,7 @@
 # @reallyfatyoshi/hypeapi
 
 Lightweight Hyperlands Api Client.\
-Version: 0.1.0
+Version: 0.1.2
 ## Installation
 
 ```sh
@@ -18,7 +18,10 @@ client
   .getPlayer("Chicken")
   .then((player) => console.log("Wins: %s", player.getTotalWins()));
 ```
+## Docs
 
+Click here to read [documentation](https://github.com/ReallyFatYoshi/HypeApi/wiki).
+<!-- 
 ## Docs
 
 ### new HypeApi([options](#options)?)
@@ -37,7 +40,7 @@ Default: `https://api.hyperlandsmc.net`
 ##### headers
 
 Type: `object`\
-Default: `{ "user-agent": "HypeApi-Client/0.1.0" }`
+Default: `{ "user-agent": "HypeApi-Client/0.1.2" }`
 
 ### Instance
 
@@ -45,7 +48,7 @@ All resource methods return a Promise, so you must await them.
 
 #### Properties Overview
 <ul>
-    <li><a href="#.lastRateLimit">lastRateLimit</a></li>
+    <li><a href="#lastRateLimit">lastRateLimit</a></li>
 </ul>
 
 #### .lastRateLimit
@@ -56,26 +59,86 @@ Returns the previous rateLimit from a previous HTTP request.
 
 #### Method Overview
 <ul>
-    <li><a href="#.getPlayer(playerName)">.getPlayer(playerName)</a></li>
-    <li><a href="#.getPlayerFromXuid(xuid)">.getPlayerFromXuid(xuid)</a></li>
+    <li><a href="#getPlayer(playerName)">.getPlayer(playerName)</a></li>
+    <li><a href="#getPlayerFromXuid(xuid)">.getPlayerFromXuid(xuid)</a></li>
+    <li><a href="#getLeaderboard(lbId)">.getLeaderboard(lbId)</a></li>
 </ul>
 
 #### .getPlayer(playerName)
+Type: `Player`\
+Default: `null`
 
 Returns a [Player Instance](#player) if a player was found.
 
 #### .getPlayerFromXuid(xuid)
+Type: `Player`\
+Default: `null`
 
 Returns a [Player Instance](#player) if a player was found.
 
-### Player
-<!-- 
+#### .getLeaderboard(lbId)
+Type: `Scoreboard`\
+Default: `null`
+
+Returns a [Scoreboard Instance](#Scoreboard) if a player was found.
+
+### Scoreboard
+
+#### Properties Overview
+<ul>
+    <li><a href="#name">.name</a></li>
+    <li><a href="#lastRefreshed">.lastRefreshed</a></li>
+</ul>
+
+#### .name
+Type: `string`\
+Default: `null`
+
+#### .lastRefreshed
+Type: `number`\
+Default: `null`
+
 #### Methods Overview
 <ul>
-    <li><a href="#.getTotalWins()">getTotalWins()</a></li>
-    <li><a href="#.getTotalKills()">Contributing</a></li>
-    <li><a href="#.getBedwarsFinalKills()">License</a></li>
-</ul> -->
+    <li><a href="#getPosition()">.getPosition()</a></li>
+    <li><a href="#getPlayer()">.getPlayer()</a></li>
+    <li><a href="#hasPlayer()">.hasPlayer()</a></li>
+</ul>
+
+#### .getPosition()
+Type: `object`\
+Default: `null`
+
+#### .getPlayer()
+Type: `object`\
+Default: `null`
+
+#### .hasPlayer()
+Type: `boolean`\
+Default: `null`
+
+### Player
+
+#### Properties Overview
+<ul>
+    <li><a href="#online">.online</a></li>
+    <li><a href="#xuid">.xuid</a></li>
+</ul>
+
+#### .online
+Type: `string`\
+Default: `false`
+
+#### .xuid
+Type: `string`\
+Default: `null`
+
+#### Methods Overview
+<ul>
+    <li><a href="#getTotalWins()">.getTotalWins()</a></li>
+    <li><a href="#getTotalKills()">.getTotalKills()</a></li>
+    <li><a href="#getBedwarsFinalKills()">.getBedwarsFinalKills()</a></li>
+</ul>
 
 #### .getTotalWins()
 
@@ -190,6 +253,4 @@ Default: `0`
 #### .getDuelsElo()
 
 Type: `number`\
-Default: `0`
-
-<h2>Note: The docs are incomplete. Should be finish in the next package version.</h2>
+Default: `0` -->

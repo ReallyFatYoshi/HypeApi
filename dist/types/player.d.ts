@@ -1,43 +1,4 @@
-export interface playerCounts {
-    total: number;
-    bedwars: {
-        total: number;
-        modes: {
-            solos: number;
-            doubles: number;
-            squads: number;
-        };
-    };
-    lobby: {
-        total: number;
-    };
-    skywars: {
-        total: number;
-        modes: {
-            solos: number;
-            doubles: number;
-            duels: number;
-        };
-    };
-    thebridge: {
-        total: number;
-        modes: {
-            "solos-ranked": number;
-            "solos-casual": number;
-            "doubles-casual": number;
-        };
-    };
-    uhcmeetup: {
-        total: number;
-        modes: {
-            solos: number;
-        };
-    };
-    duels: {
-        total: number;
-    };
-}
-export interface playerStats {
+export interface apiPlayerResponse {
     status: {
         online: boolean;
         lastLogout: number;
@@ -53,7 +14,7 @@ export interface playerStats {
     stats: {
         general: {
             playerName: string;
-            xuid: number;
+            xuid: string;
             level: number;
             progress: number;
             maxProgress: number;
@@ -103,18 +64,4 @@ export interface playerStats {
             kills: number;
         };
     };
-}
-export interface LeaderboardPlayersRaw {
-    name: string;
-    lastRefreshed: number;
-    data?: Array<[string, number]>;
-}
-export interface LeaderboardPlayers {
-    name: string;
-    lastRefreshed: number;
-    players: Array<{
-        name: string;
-        position: number;
-        value: number;
-    }>;
 }

@@ -103,6 +103,4 @@ typings/
 # TernJS port file
 .tern-port
 
-
-*.ts
-!*.d.ts
+.vscode

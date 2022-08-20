@@ -47,4 +47,4 @@ server.on("request", async function (req, res) {
   }
 });
 
-server.listen(3006);
+server.listen(3000);

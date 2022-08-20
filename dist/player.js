@@ -16,6 +16,8 @@ class Player {
     constructor(data) {
         _Player_data.set(this, void 0);
         __classPrivateFieldSet(this, _Player_data, data, "f");
+        this.online = data.status.online;
+        this.xuid = data.stats.general.xuid;
     }
     getLastLogout(format = "DD/MM/YYYY") {
         var _a;

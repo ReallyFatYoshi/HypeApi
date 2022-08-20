@@ -14,11 +14,12 @@ var _HypeApi_headers, _HypeApi_endpoints;
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const player_1 = require("./player");
+const leaderboard_1 = require("./leaderboard");
 let leaderboardData;
 class HypeApi {
     constructor(options) {
         _HypeApi_headers.set(this, {
-            "user-agent": "HypeApi-Client/0.1.0",
+            "user-agent": "HypeApi-Client/0.1.2",
         });
         _HypeApi_endpoints.set(this, {
             baseUrl: "https://api.hyperlandsmc.net",
@@ -41,23 +42,18 @@ class HypeApi {
             .then((res) => {
             this.lastRateLimit = parseInt(res.headers["x-rate-limit-remaining"]);
             return res.data;
-        }).catch(() => null);
+        })
+            .catch(() => null);
     }
     async fetchLeaderboardData() {
         if (leaderboardData) {
             if (Date.now() - leaderboardData.fetchedAt <= 3600 * 1000 * 3)
                 return;
         }
-        let data = await (0, axios_1.default)({
-            url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").baseUrl + __classPrivateFieldGet(this, _HypeApi_endpoints, "f").hypelb,
-            headers: __classPrivateFieldGet(this, _HypeApi_headers, "f"),
-        })
-            .then((res) => {
-            this.lastRateLimit = parseInt(res.headers["x-rate-limit-remaining"]);
-            res.data.fetchedAt = Date.now();
-            return res.data;
-        })
-            .catch(() => null);
+        let data = await this.createRequest({
+            url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").hypelb,
+        });
+        data.fetchedAt = Date.now();
         for (const k of Object.keys(data)) {
             if (k == "fetchedAt" || !Array.isArray(data[k].data))
                 continue;
@@ -74,14 +70,12 @@ class HypeApi {
         }
         leaderboardData = data;
     }
-    async getLeaderboard(lb) {
+    async getLeaderboard(lbId) {
         await this.fetchLeaderboardData();
-        return leaderboardData[lb];
-    }
-    async getLeaderboardPlayer(lb, playerName) {
-        var _a, _b;
-        await this.fetchLeaderboardData();
-        return (_b = (_a = leaderboardData[lb].players) === null || _a === void 0 ? void 0 : _a.filter((v) => v.name == playerName)) === null || _b === void 0 ? void 0 : _b.at(0);
+        const lbData = leaderboardData[lbId];
+        if (!lbData)
+            return;
+        return new leaderboard_1.default(lbData);
     }
     async getPlayer(playerName) {
         const res = await this.createRequest({
@@ -92,14 +86,13 @@ class HypeApi {
         return new player_1.default(res);
     }
     async getPlayerFromXuid(xuid) {
-        return this.createRequest({
+        const res = await this.createRequest({
             url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").hypexuid + "/" + xuid,
         });
+        if (!res)
+            return res;
+        return new player_1.default(res);
     }
-    /**
-     * @method getPlayerCounts
-     * @returns {Promise<playerCounts | null>} Object with player counts for all gamemodes.
-     */
     async getPlayerCounts() {
         return this.createRequest({
             url: __classPrivateFieldGet(this, _HypeApi_endpoints, "f").hypecounts,

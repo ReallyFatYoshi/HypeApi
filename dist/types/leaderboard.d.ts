@@ -1,8 +1,21 @@
-import { LeaderboardPlayersRaw, LeaderboardPlayers } from "./interfaces";
-export declare type LeaderboardRaw = {
+export interface apiLeaderboard {
+    name: string;
+    lastRefreshed: number;
+    data?: Array<[string, number]>;
+}
+export interface LeaderboardPlayers {
+    name: string;
+    lastRefreshed: number;
+    players: Array<{
+        name: string;
+        position: number;
+        value: number;
+    }>;
+}
+export declare type apiLeaderboardResponse = {
     fetchedAt: number;
 } & {
-    [lbId: string]: LeaderboardPlayersRaw;
+    [lbId: string]: apiLeaderboard;
 };
 export declare type Leaderboard = {
     fetchedAt: number;
