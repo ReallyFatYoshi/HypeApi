@@ -1,7 +1,7 @@
 # @reallyfatyoshi/hypeapi
 
 Lightweight Hyperlands Api Client.\
-Version: 0.1.2
+Version: 0.1.4
 ## Installation
 
 ```sh

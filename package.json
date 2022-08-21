@@ -1,6 +1,6 @@
 {
   "name": "@reallyfatyoshi/hypeapi",
-  "version": "0.1.2",
+  "version": "0.1.1",
   "description": "Lightweight Hyperlands Api Client.",
   "engines": {
     "node": "^16.14.2",
@@ -30,9 +30,6 @@
   ],
   "author": "ReallyFatYoshi",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "bugs": {
     "url": "https://github.com/ReallyFatYoshi/HypeApi/issues"
   },

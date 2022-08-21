@@ -16,9 +16,11 @@ class Player {
     constructor(data) {
         _Player_data.set(this, void 0);
         __classPrivateFieldSet(this, _Player_data, data, "f");
+        this.playerName = data.stats.general.playerName;
         this.online = data.status.online;
         this.xuid = data.stats.general.xuid;
     }
+    ;
     getLastLogout(format = "DD/MM/YYYY") {
         var _a;
         const date = new Date(__classPrivateFieldGet(this, _Player_data, "f").status.lastLogout * 1000);
@@ -149,6 +151,25 @@ class Player {
     }
     getDuelsElo() {
         return __classPrivateFieldGet(this, _Player_data, "f").stats.duels.elo;
+    }
+    /* TheBridge  */
+    getTheBridgeWins() {
+        return __classPrivateFieldGet(this, _Player_data, "f").stats.thebridge.wins;
+    }
+    getTheBridgeGoals() {
+        return __classPrivateFieldGet(this, _Player_data, "f").stats.thebridge.goals;
+    }
+    getTheBridgeBestWinstreak() {
+        return __classPrivateFieldGet(this, _Player_data, "f").stats.thebridge.bestWinstreak;
+    }
+    getTheBridgeCurrentWinstreak() {
+        return __classPrivateFieldGet(this, _Player_data, "f").stats.thebridge.currentWinstreak;
+    }
+    getTheBridgePeakRatingSolos() {
+        return __classPrivateFieldGet(this, _Player_data, "f").stats.thebridge.peakRatingSolos;
+    }
+    getTheBridgeRatingDataSolos() {
+        return __classPrivateFieldGet(this, _Player_data, "f").stats.thebridge.ratingDataSolos;
     }
 }
 exports.default = Player;

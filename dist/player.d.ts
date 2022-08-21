@@ -3,6 +3,7 @@ export default class Player {
     #private;
     online: boolean;
     xuid: string;
+    playerName: string;
     constructor(data: apiPlayerResponse);
     getLastLogout(format?: "YYYY/DD/MM" | "MM/DD/YYYY" | "DD/MM/YYYY"): {
         fullDate: string;
@@ -50,4 +51,15 @@ export default class Player {
     getDuelsBestWinstreak(): number;
     getDuelsCurrentWinstreak(): number;
     getDuelsElo(): number;
+    getTheBridgeWins(): number;
+    getTheBridgeGoals(): number;
+    getTheBridgeBestWinstreak(): number;
+    getTheBridgeCurrentWinstreak(): number;
+    getTheBridgePeakRatingSolos(): number;
+    getTheBridgeRatingDataSolos(): {
+        r: number;
+        RD: number;
+        sigma: number;
+        lastCalculatedRD: number;
+    };
 }

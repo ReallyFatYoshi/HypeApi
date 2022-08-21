@@ -5,12 +5,15 @@ export default class Player {
   
   public online: boolean;
   public xuid: string;
+  public playerName: string;
 
   constructor(data: apiPlayerResponse) {
     this.#data = data;
+
+    this.playerName = data.stats.general.playerName;
     this.online = data.status.online;
     this.xuid = data.stats.general.xuid;
-  }
+  };
 
   getLastLogout(
     format: "YYYY/DD/MM" | "MM/DD/YYYY" | "DD/MM/YYYY" = "DD/MM/YYYY"
@@ -191,5 +194,30 @@ export default class Player {
 
   getDuelsElo(): number {
     return this.#data.stats.duels.elo;
+  }
+
+  /* TheBridge  */
+  getTheBridgeWins() {
+    return this.#data.stats.thebridge.wins;
+  }
+
+  getTheBridgeGoals() {
+    return this.#data.stats.thebridge.goals;
+  }
+
+  getTheBridgeBestWinstreak() {
+    return this.#data.stats.thebridge.bestWinstreak;
+  }
+
+  getTheBridgeCurrentWinstreak() {
+    return this.#data.stats.thebridge.currentWinstreak;
+  }
+
+  getTheBridgePeakRatingSolos() {
+    return this.#data.stats.thebridge.peakRatingSolos;
+  }
+
+  getTheBridgeRatingDataSolos() {
+    return this.#data.stats.thebridge.ratingDataSolos;
   }
 }
