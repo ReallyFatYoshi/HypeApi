@@ -1,6 +1,6 @@
 {
   "name": "@reallyfatyoshi/hypeapi",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "Lightweight Hyperlands Api Client.",
   "engines": {
     "node": "^16.14.2",
