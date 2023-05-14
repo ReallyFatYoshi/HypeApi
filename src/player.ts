@@ -1,223 +1,233 @@
-import { apiPlayerResponse } from "./types/player";
+import { PlayerResponse } from './types/player.js';
 
 export default class Player {
-  #data: apiPlayerResponse;
-  
-  public online: boolean;
-  public xuid: string;
-  public playerName: string;
+    #data: PlayerResponse;
 
-  constructor(data: apiPlayerResponse) {
-    this.#data = data;
+    public online: boolean;
+    public xuid: string;
+    public playerName: string;
+    public coins: number;
+    public crystals: number;
+    public tokens: number;
 
-    this.playerName = data.stats.general.playerName;
-    this.online = data.status.online;
-    this.xuid = data.stats.general.xuid;
-  };
+    constructor(data: PlayerResponse) {
+        this.#data = data;
 
-  getLastLogout(
-    format: "YYYY/DD/MM" | "MM/DD/YYYY" | "DD/MM/YYYY" = "DD/MM/YYYY"
-  ): {
-    fullDate: string;
-    time: string;
-    day: number;
-    month: number;
-    year: number;
-    timeZone: string;
-  } {
-    const date = new Date(this.#data.status.lastLogout * 1000);
-    return {
-      fullDate: (
-        ["YYYY/DD/MM", "MM/DD/YYYY", "DD/MM/YYYY"]?.filter(
-          (v) => v == format
-        ) || ["YYYY/DD/MM"]
-      )
-        .join("")
-        .replace(/YYYY/g, date.getFullYear().toString())
-        .replace(/MM/g, (date.getMonth() + 1).toString().padStart(2, "0"))
-        .replace(/DD/g, date.getDate().toString().padStart(2, "0")),
-      time:
-        date.getHours().toString().padStart(2, "0") +
-        ":" +
-        date.getMinutes().toString().padStart(2, "0"),
-      day: date.getDate(),
-      month: date.getMonth() + 1,
-      year: date.getFullYear(),
-      timeZone: "UTC",
-    };
-  }
+        this.playerName = data.stats.general.playerName;
+        this.online = data.status.online;
+        this.xuid = data.stats.general.xuid;
 
-  getLastServer(): string {
-    return this.#data.status.lastServer;
-  }
-
-  getRank(): {
-    rank: string;
-    expiry: number;
-    plusColor: string;
-  } {
-    return {
-      rank: this.#data.rankData.rank,
-      expiry: this.#data.rankData.expiry,
-      plusColor: this.#data.rankData.pluscolor,
-    };
-  }
-
-  getTags(): {
-    tag: string;
-    extraTags: string[];
-  } {
-    return {
-      tag: this.#data.rankData.tag,
-      extraTags: this.#data.rankData.extraTags,
-    };
-  }
-
-  getLevel(): {
-    level: number;
-    progress: number;
-    maxProgress: number;
-  } {
-    return {
-      level: this.#data.stats.general.level,
-      progress: this.#data.stats.general.progress,
-      maxProgress: this.#data.stats.general.maxProgress,
-    };
-  }
-
-  getTotalWins(): number {
-    let wins = 0;
-    for (const b of Object.values(this.#data.stats)) {
-      for (const [k, v] of Object.entries(b)) {
-        if (!k.toLowerCase().match(/wins$/g)) continue;
-        wins += v as number;
-      }
+        this.coins = data.stats.general.coins;
+        this.crystals = data.stats.general.crystals;
+        this.tokens = data.stats.general.tokens;
     }
-    return wins;
-  }
 
-  getTotalKills(): number {
-    let kills = 0;
-    for (const b of Object.values(this.#data.stats)) {
-      for (const [k, v] of Object.entries(b)) {
-        if (!k.toLowerCase().match(/kills$/g)) continue;
-        kills += v as number;
-      }
+    getLastLogout(
+        format: 'YYYY/DD/MM' | 'MM/DD/YYYY' | 'DD/MM/YYYY' = 'DD/MM/YYYY'
+    ): {
+        fullDate: string;
+        time: string;
+        day: number;
+        month: number;
+        year: number;
+        timeZone: string;
+    } {
+        const date = new Date(this.#data.status.lastLogout * 1000);
+        return {
+            fullDate: (
+                ['YYYY/DD/MM', 'MM/DD/YYYY', 'DD/MM/YYYY']?.filter(
+                    (v) => v == format
+                ) || ['YYYY/DD/MM']
+            )
+                .join('')
+                .replace(/YYYY/g, date.getFullYear().toString())
+                .replace(
+                    /MM/g,
+                    (date.getMonth() + 1).toString().padStart(2, '0')
+                )
+                .replace(/DD/g, date.getDate().toString().padStart(2, '0')),
+            time:
+                date.getHours().toString().padStart(2, '0') +
+                ':' +
+                date.getMinutes().toString().padStart(2, '0'),
+            day: date.getDate(),
+            month: date.getMonth() + 1,
+            year: date.getFullYear(),
+            timeZone: 'UTC',
+        };
     }
-    return kills;
-  }
 
-  /* Bedwars */
-  getBedwarsFinalKills(): number {
-    return this.#data.stats.bedwars.finalKills;
-  }
+    getLastServer(): string {
+        return this.#data.status.lastServer;
+    }
 
-  getBedwarsKills(): number {
-    return this.#data.stats.bedwars.kills;
-  }
+    getRank(): {
+        rank: string;
+        expiry: number;
+        plusColor: string;
+    } {
+        return {
+            rank: this.#data.rankData.rank,
+            expiry: this.#data.rankData.expiry,
+            plusColor: this.#data.rankData.pluscolor,
+        };
+    }
 
-  getBedwarsWins(): number {
-    return this.#data.stats.bedwars.wins;
-  }
+    getTags(): {
+        tag: string;
+        extraTags: string[];
+    } {
+        return {
+            tag: this.#data.rankData.tag,
+            extraTags: this.#data.rankData.extraTags,
+        };
+    }
 
-  getBedwarsBedsBroken(): number {
-    return this.#data.stats.bedwars.bedsBroken;
-  }
+    getLevel(): {
+        level: number;
+        progress: number;
+        maxProgress: number;
+    } {
+        return {
+            level: this.#data.stats.general.level,
+            progress: this.#data.stats.general.progress,
+            maxProgress: this.#data.stats.general.maxProgress,
+        };
+    }
 
-  getBedwarsBestWinstreak(): number {
-    return this.#data.stats.bedwars.bestWinstreak;
-  }
+    getTotalWins(): number {
+        let wins = 0;
+        for (const b of Object.values(this.#data.stats)) {
+            for (const [k, v] of Object.entries(b)) {
+                if (!k.toLowerCase().match(/wins$/g)) continue;
+                wins += v as number;
+            }
+        }
+        return wins;
+    }
 
-  getBedwarsCurrentWinstreak(): number {
-    return this.#data.stats.bedwars.currentWinstreak;
-  }
+    getTotalKills(): number {
+        let kills = 0;
+        for (const b of Object.values(this.#data.stats)) {
+            for (const [k, v] of Object.entries(b)) {
+                if (!k.toLowerCase().match(/kills$/g)) continue;
+                kills += v as number;
+            }
+        }
+        return kills;
+    }
 
-  /* Skywars */
-  getSkywarsKills(): number {
-    return this.#data.stats.skywars.kills;
-  }
+    /* Bedwars */
+    getBedwarsFinalKills(): number {
+        return this.#data.stats.bedwars.finalKills;
+    }
 
-  getSkywarsWinss(): number {
-    return this.#data.stats.skywars.wins;
-  }
+    getBedwarsKills(): number {
+        return this.#data.stats.bedwars.kills;
+    }
 
-  /* Spleef */
-  getSpleefWins(): number {
-    return this.#data.stats.spleef.wins;
-  }
+    getBedwarsWins(): number {
+        return this.#data.stats.bedwars.wins;
+    }
 
-  getSpleefCurrentWinstreak(): number {
-    return this.#data.stats.spleef.currentWinstreak;
-  }
+    getBedwarsBedsBroken(): number {
+        return this.#data.stats.bedwars.bedsBroken;
+    }
 
-  getSpleefBestWinstreak(): number {
-    return this.#data.stats.spleef.bestWinstreak;
-  }
+    getBedwarsBestWinstreak(): number {
+        return this.#data.stats.bedwars.bestWinstreak;
+    }
 
-  /* Uhcmeetup */
-  getUHCMeetupWins(): number {
-    return this.#data.stats.uhcmeetup.wins;
-  }
+    getBedwarsCurrentWinstreak(): number {
+        return this.#data.stats.bedwars.currentWinstreak;
+    }
 
-  getUHCMeetupKills(): number {
-    return this.#data.stats.uhcmeetup.kills;
-  }
+    /* Skywars */
+    getSkywarsKills(): number {
+        return this.#data.stats.skywars.kills;
+    }
 
-  /* Duels */
-  getDuelsArcherWins(): number {
-    return this.#data.stats.duels.archerWins;
-  }
+    getSkywarsWinss(): number {
+        return this.#data.stats.skywars.wins;
+    }
 
-  getDuelsIronWins(): number {
-    return this.#data.stats.duels.ironWins;
-  }
+    /* Spleef */
+    getSpleefWins(): number {
+        return this.#data.stats.spleef.wins;
+    }
 
-  getDuelsPotWins(): number {
-    return this.#data.stats.duels.potWins;
-  }
-  
-  getDuelsSumoWins(): number {
-    return this.#data.stats.duels.sumoWins;
-  }
+    getSpleefCurrentWinstreak(): number {
+        return this.#data.stats.spleef.currentWinstreak;
+    }
 
-  getDuelsBuildUhcWins(): number {
-    return this.#data.stats.duels.buildUhcWins;
-  }
+    getSpleefBestWinstreak(): number {
+        return this.#data.stats.spleef.bestWinstreak;
+    }
 
-  getDuelsBestWinstreak(): number {
-    return this.#data.stats.duels.bestWinstreak;
-  }
+    /* Uhcmeetup */
+    getUHCMeetupWins(): number {
+        return this.#data.stats.uhcmeetup.wins;
+    }
 
-  getDuelsCurrentWinstreak(): number {
-    return this.#data.stats.duels.currentWinstreak;
-  }
+    getUHCMeetupKills(): number {
+        return this.#data.stats.uhcmeetup.kills;
+    }
 
-  getDuelsElo(): number {
-    return this.#data.stats.duels.elo;
-  }
+    /* Duels */
+    getDuelsArcherWins(): number {
+        return this.#data.stats.duels.archerWins;
+    }
 
-  /* TheBridge  */
-  getTheBridgeWins() {
-    return this.#data.stats.thebridge.wins;
-  }
+    getDuelsIronWins(): number {
+        return this.#data.stats.duels.ironWins;
+    }
 
-  getTheBridgeGoals() {
-    return this.#data.stats.thebridge.goals;
-  }
+    getDuelsPotWins(): number {
+        return this.#data.stats.duels.potWins;
+    }
 
-  getTheBridgeBestWinstreak() {
-    return this.#data.stats.thebridge.bestWinstreak;
-  }
+    getDuelsSumoWins(): number {
+        return this.#data.stats.duels.sumoWins;
+    }
 
-  getTheBridgeCurrentWinstreak() {
-    return this.#data.stats.thebridge.currentWinstreak;
-  }
+    getDuelsBuildUhcWins(): number {
+        return this.#data.stats.duels.buildUhcWins;
+    }
 
-  getTheBridgePeakRatingSolos() {
-    return this.#data.stats.thebridge.peakRatingSolos;
-  }
+    getDuelsBestWinstreak(): number {
+        return this.#data.stats.duels.bestWinstreak;
+    }
 
-  getTheBridgeRatingDataSolos() {
-    return this.#data.stats.thebridge.ratingDataSolos;
-  }
+    getDuelsCurrentWinstreak(): number {
+        return this.#data.stats.duels.currentWinstreak;
+    }
+
+    getDuelsElo(): number {
+        return this.#data.stats.duels.elo;
+    }
+
+    /* TheBridge  */
+    getTheBridgeWins() {
+        return this.#data.stats.thebridge.wins;
+    }
+
+    getTheBridgeGoals() {
+        return this.#data.stats.thebridge.goals;
+    }
+
+    getTheBridgeBestWinstreak() {
+        return this.#data.stats.thebridge.bestWinstreak;
+    }
+
+    getTheBridgeCurrentWinstreak() {
+        return this.#data.stats.thebridge.currentWinstreak;
+    }
+
+    getTheBridgePeakRatingSolos() {
+        return this.#data.stats.thebridge.peakRatingSolos;
+    }
+
+    getTheBridgeRatingDataSolos() {
+        return this.#data.stats.thebridge.ratingDataSolos;
+    }
 }

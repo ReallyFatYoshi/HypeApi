@@ -1,11 +1,14 @@
-import { apiPlayerResponse } from "./types/player";
+import { PlayerResponse } from './types/player.js';
 export default class Player {
     #private;
     online: boolean;
     xuid: string;
     playerName: string;
-    constructor(data: apiPlayerResponse);
-    getLastLogout(format?: "YYYY/DD/MM" | "MM/DD/YYYY" | "DD/MM/YYYY"): {
+    coins: number;
+    crystals: number;
+    tokens: number;
+    constructor(data: PlayerResponse);
+    getLastLogout(format?: 'YYYY/DD/MM' | 'MM/DD/YYYY' | 'DD/MM/YYYY'): {
         fullDate: string;
         time: string;
         day: number;

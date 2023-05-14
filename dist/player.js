@@ -1,4 +1,3 @@
-"use strict";
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
@@ -11,32 +10,33 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Player_data;
-Object.defineProperty(exports, "__esModule", { value: true });
-class Player {
+export default class Player {
     constructor(data) {
         _Player_data.set(this, void 0);
         __classPrivateFieldSet(this, _Player_data, data, "f");
         this.playerName = data.stats.general.playerName;
         this.online = data.status.online;
         this.xuid = data.stats.general.xuid;
+        this.coins = data.stats.general.coins;
+        this.crystals = data.stats.general.crystals;
+        this.tokens = data.stats.general.tokens;
     }
-    ;
-    getLastLogout(format = "DD/MM/YYYY") {
+    getLastLogout(format = 'DD/MM/YYYY') {
         var _a;
         const date = new Date(__classPrivateFieldGet(this, _Player_data, "f").status.lastLogout * 1000);
         return {
-            fullDate: (((_a = ["YYYY/DD/MM", "MM/DD/YYYY", "DD/MM/YYYY"]) === null || _a === void 0 ? void 0 : _a.filter((v) => v == format)) || ["YYYY/DD/MM"])
-                .join("")
+            fullDate: (((_a = ['YYYY/DD/MM', 'MM/DD/YYYY', 'DD/MM/YYYY']) === null || _a === void 0 ? void 0 : _a.filter((v) => v == format)) || ['YYYY/DD/MM'])
+                .join('')
                 .replace(/YYYY/g, date.getFullYear().toString())
-                .replace(/MM/g, (date.getMonth() + 1).toString().padStart(2, "0"))
-                .replace(/DD/g, date.getDate().toString().padStart(2, "0")),
-            time: date.getHours().toString().padStart(2, "0") +
-                ":" +
-                date.getMinutes().toString().padStart(2, "0"),
+                .replace(/MM/g, (date.getMonth() + 1).toString().padStart(2, '0'))
+                .replace(/DD/g, date.getDate().toString().padStart(2, '0')),
+            time: date.getHours().toString().padStart(2, '0') +
+                ':' +
+                date.getMinutes().toString().padStart(2, '0'),
             day: date.getDate(),
             month: date.getMonth() + 1,
             year: date.getFullYear(),
-            timeZone: "UTC",
+            timeZone: 'UTC',
         };
     }
     getLastServer() {
@@ -172,5 +172,4 @@ class Player {
         return __classPrivateFieldGet(this, _Player_data, "f").stats.thebridge.ratingDataSolos;
     }
 }
-exports.default = Player;
 _Player_data = new WeakMap();

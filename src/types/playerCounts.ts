@@ -1,39 +1,39 @@
-export interface apiPlayerCountsResponse {
-  total: number;
-  bedwars: {
+export interface GlobalPlayerCountResponse {
     total: number;
-    modes: {
-      solos: number;
-      doubles: number;
-      squads: number;
+    bedwars: {
+        total: number;
+        modes: {
+            solos: number;
+            doubles: number;
+            squads: number;
+        };
     };
-  };
-  lobby: {
-    total: number;
-  };
-  skywars: {
-    total: number;
-    modes: {
-      solos: number;
-      doubles: number;
-      duels: number;
+    lobby: {
+        total: number;
     };
-  };
-  thebridge: {
-    total: number;
-    modes: {
-      "solos-ranked": number;
-      "solos-casual": number;
-      "doubles-casual": number;
+    skywars: {
+        total: number;
+        modes: {
+            solos: number;
+            doubles: number;
+            duels: number;
+        };
     };
-  };
-  uhcmeetup: {
-    total: number;
-    modes: {
-      solos: number;
+    thebridge: {
+        total: number;
+        modes: {
+            'solos-ranked': number;
+            'solos-casual': number;
+            'doubles-casual': number;
+        };
     };
-  };
-  duels: {
-    total: number;
-  };
+    uhcmeetup: {
+        total: number;
+        modes: {
+            solos: number;
+        };
+    };
+    duels: {
+        total: number;
+    };
 }

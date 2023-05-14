@@ -1,4 +1,4 @@
-export interface apiPlayerCountsResponse {
+export interface GlobalPlayerCountResponse {
     total: number;
     bedwars: {
         total: number;
@@ -22,9 +22,9 @@ export interface apiPlayerCountsResponse {
     thebridge: {
         total: number;
         modes: {
-            "solos-ranked": number;
-            "solos-casual": number;
-            "doubles-casual": number;
+            'solos-ranked': number;
+            'solos-casual': number;
+            'doubles-casual': number;
         };
     };
     uhcmeetup: {

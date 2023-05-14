@@ -1,4 +1,3 @@
-"use strict";
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
@@ -11,8 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Leaderboard_data, _Leaderboard_names;
-Object.defineProperty(exports, "__esModule", { value: true });
-class Leaderboard {
+export default class Leaderboard {
     constructor(apiLeaderboard) {
         _Leaderboard_data.set(this, void 0);
         _Leaderboard_names.set(this, void 0);
@@ -23,8 +21,9 @@ class Leaderboard {
     }
     getPlayer(playerName) {
         const found = __classPrivateFieldGet(this, _Leaderboard_names, "f").includes(playerName.toLocaleLowerCase());
-        if (!found)
+        if (!found) {
             return;
+        }
         const index = __classPrivateFieldGet(this, _Leaderboard_names, "f").indexOf(playerName.toLocaleLowerCase());
         return __classPrivateFieldGet(this, _Leaderboard_data, "f").players[index];
     }
@@ -36,5 +35,4 @@ class Leaderboard {
         return player;
     }
 }
-exports.default = Leaderboard;
 _Leaderboard_data = new WeakMap(), _Leaderboard_names = new WeakMap();

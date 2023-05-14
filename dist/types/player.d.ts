@@ -1,4 +1,4 @@
-export interface apiPlayerResponse {
+export interface PlayerResponse {
     status: {
         online: boolean;
         lastLogout: number;
@@ -18,6 +18,9 @@ export interface apiPlayerResponse {
             level: number;
             progress: number;
             maxProgress: number;
+            tokens: number;
+            coins: number;
+            crystals: number;
         };
         skywars: {
             wins: number;

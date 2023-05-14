@@ -1,4 +1,4 @@
-import { LeaderboardPlayers } from "./types/leaderboard";
+import { LeaderboardPlayers } from './types/leaderboard.js';
 export default class Leaderboard {
     #private;
     name: string;
