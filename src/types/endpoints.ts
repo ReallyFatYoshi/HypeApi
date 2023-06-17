@@ -1,4 +1,4 @@
-export default interface endpoints {
+export default interface IEndpoints {
     baseUrl: string;
     hypelb: string;
     hypeuser: string;

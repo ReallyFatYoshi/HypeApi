@@ -80,7 +80,7 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-# dist
+dist
 
 # Gatsby files
 .cache/
@@ -103,6 +103,4 @@ typings/
 # TernJS port file
 .tern-port
 package-lock.json
-.vscode
-
-!.vscode/extensions.json
+.vscode/settings.json

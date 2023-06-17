@@ -1,4 +1,4 @@
-export interface GlobalPlayerCountResponse {
+export interface IGlobalPlayerCountResponse {
     total: number;
     bedwars: {
         total: number;

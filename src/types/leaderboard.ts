@@ -1,32 +1,34 @@
-export interface apiLeaderboard {
+export interface IAPILeaderboard {
     name: string;
     lastRefreshed: number;
     data?: Array<[string, number]>;
 }
 
-export interface LeaderboardPlayers {
+export interface ILeaderboardPlayer {
     name: string;
-    lastRefreshed: number;
-    players: Array<{
-        name: string;
-        position: number;
-        value: number;
-    }>;
+    position: number;
+    value: number;
 }
 
-export type apiLeaderboardResponse = {
+export interface ILeaderboardPlayers {
+    name: string;
+    lastRefreshed: number;
+    players: Array<ILeaderboardPlayer>;
+}
+
+export type IAPILeaderboardResponse = {
     fetchedAt: number;
 } & {
-    [lbId: string]: apiLeaderboard;
+    [lbId: string]: IAPILeaderboard;
 };
 
 export type Leaderboard = {
     fetchedAt: number;
 } & {
-    [lbId: string]: LeaderboardPlayers;
+    [lbId: string]: ILeaderboardPlayers;
 };
 
-export type LeaderboardIds =
+export type TLeaderboardId =
     | 'stats.bedwars.bestWinstreak'
     | 'stats.bedwars.brokenBeds'
     | 'stats.bedwars.currentWinstreak'

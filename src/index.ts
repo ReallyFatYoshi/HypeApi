@@ -1,6 +1,11 @@
-import HypeApi from './app.js';
-import Leaderboard from './leaderboard.js';
-import Player from './player.js';
+/** @module @reallyfatyoshi/hypeapi */
 
+import HypeApi from './classes/HypeApi.js';
+import Leaderboard from './classes/leaderboard.js';
+import Player from './classes/player.js';
+
+/**
+ * @license MIT License
+ */
 export default HypeApi;
 export { Leaderboard, Player };
