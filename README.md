@@ -21,6 +21,9 @@ client
 ## Docs
 
 Click here to read [documentation](https://github.com/ReallyFatYoshi/HypeApi/wiki).
+
+> [!WARNING]
+> This project is officially deprecated since the shutdown of hyperlandsmc.
 <!-- 
 ## Docs
 
