@@ -1,5 +1,8 @@
 # @reallyfatyoshi/hypeapi
 
+> [!WARNING]
+> This project is officially deprecated since the shutdown of hyperlandsmc.
+
 Lightweight Hyperlands Api Client.\
 Version: 0.1.4
 ## Installation
@@ -22,8 +25,6 @@ client
 
 Click here to read [documentation](https://github.com/ReallyFatYoshi/HypeApi/wiki).
 
-> [!WARNING]
-> This project is officially deprecated since the shutdown of hyperlandsmc.
 <!-- 
 ## Docs
 
