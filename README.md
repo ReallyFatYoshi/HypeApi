@@ -1,7 +1,7 @@
 # @reallyfatyoshi/hypeapi
 
 > [!WARNING]
-> This project is officially deprecated since the shutdown of hyperlandsmc.
+> This project is officially deprecated since the shutdown of HyperlandsMC.
 
 Lightweight Hyperlands Api Client.\
 Version: 0.1.4
